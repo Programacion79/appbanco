@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Online</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Banco Online</h1>
+        <nav id="navMenu" style="display:none;">
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('crearCliente')">Crear Cliente</a></li>
+                <li><a href="#" onclick="mostrarSeccion('crearCuenta')">Crear Cuenta</a></li>
+                <li><a href="#" onclick="mostrarSeccion('actualizarDatos')">Actualizar Datos</a></li>
+                <li><a href="#" onclick="mostrarSeccion('transacciones')">Transacciones</a></li>
+                <li><a href="#" onclick="logout()">Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="login">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </section>
+
+        <section id="crearCliente" style="display:none;">
+            <h2>Crear Cliente</h2>
+            <form id="crearClienteForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+                <button type="submit">Crear Cliente</button>
+            </form>
+        </section>
+
+        <section id="crearCuenta" style="display:none;">
+            <h2>Crear Cuenta</h2>
+            <form id="crearCuentaForm">
+                <label for="clienteId">ID Cliente:</label>
+                <input type="text" id="clienteId" name="clienteId" required>
+                <label for="tipoCuenta">Tipo de Cuenta:</label>
+                <select id="tipoCuenta" name="tipoCuenta">
+                    <option value="corriente">Corriente</option>
+                    <option value="ahorros">Ahorros</option>
+                </select>
+                <button type="submit">Crear Cuenta</button>
+            </form>
+        </section>
+
+        <section id="actualizarDatos" style="display:none;">
+            <h2>Actualizar Datos</h2>
+            <form id="actualizarDatosForm">
+                <label for="clienteIdActualizar">ID Cliente:</label>
+                <input type="text" id="clienteIdActualizar" name="clienteIdActualizar" required>
+                <label for="nombreActualizar">Nombre:</label>
+                <input type="text" id="nombreActualizar" name="nombreActualizar">
+                <label for="apellidoActualizar">Apellido:</label>
+                <input type="text" id="apellidoActualizar" name="apellidoActualizar">
+                <label for="emailActualizar">Email:</label>
+                <input type="email" id="emailActualizar" name="emailActualizar">
+                <label for="telefonoActualizar">Teléfono:</label>
+                <input type="tel" id="telefonoActualizar" name="telefonoActualizar">
+                <button type="submit">Actualizar Datos</button>
+            </form>
+        </section>
+
+        <section id="transacciones" style="display:none;">
+            <h2>Transacciones</h2>
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('retirar')">Retirar</a></li>
+                <li><a href="#" onclick="mostrarSeccion('consignar')">Consignar</a></li>
+                <li><a href="#" onclick="mostrarSeccion('consultarMovimientos')">Consultar Movimientos</a></li>
+                <li><a href="#" onclick="mostrarSeccion('consultarSaldo')">Consultar Saldo</a></li>
+            </ul>
+        </section>
+
+        <section id="retirar" style="display:none;">
+            <h2>Retirar</h2>
+            <form id="retirarForm">
+                <label for="cuentaIdRetirar">ID Cuenta:</label>
+                <input type="text" id="cuentaIdRetirar" name="cuentaIdRetirar" required>
+                <label for="montoRetirar">Monto:</label>
+                <input type="number" id="montoRetirar" name="montoRetirar" required>
+                <button type="submit">Retirar</button>
+            </form>
+        </section>
+
+        <section id="consignar" style="display:none;">
+            <h2>Consignar</h2>
+            <form id="consignarForm">
+                <label for="cuentaIdConsignar">ID Cuenta:</label>
+                <input type="text" id="cuentaIdConsignar" name="cuentaIdConsignar" required>
+                <label for="montoConsignar">Monto:</label>
+                <input type="number" id="montoConsignar" name="montoConsignar" required>
+                <button type="submit">Consignar</button>
+            </form>
+        </section>
+
+        <section id="consultarMovimientos" style="display:none;">
+            <h2>Consultar Movimientos</h2>
+            <form id="consultarMovimientosForm">
+                <label for="cuentaIdMovimientos">ID Cuenta:</label>
+                <input type="text" id="cuentaIdMovimientos" name="cuentaIdMovimientos" required>
+                <button type="submit">Consultar</button>
+            </form>
+            <!-- Mostrar movimientos aquí -->
+            <div id="movimientosList"></div>
+        </section>
+
+        <section id="consultarSaldo" style="display:none;">
+            <h2>Consultar Saldo</h2>
+            <form id="consultarSaldoForm">
+                <label for="cuentaIdSaldo">ID Cuenta:</label>
+                <input type="text" id="cuentaIdSaldo" name="cuentaIdSaldo" required>
+                <button type="submit">Consultar</button>
+            </form>
+            <!-- Mostrar saldo aquí -->
+            <div id="saldoInfo"></div>
+        </section>
+    </main>
+    <section id="retirar" style="display:none;">
+        <h2>Retirar</h2>
+        <form id="retirarForm">
+            <label for="cuentaIdRetirar">ID Cuenta:</label>
+            <input type="text" id="cuentaIdRetirar" name="cuentaIdRetirar" required>
+            <label for="montoRetirar">Monto:</label>
+            <input type="number" id="montoRetirar" name="montoRetirar" required>
+            <button type="submit">Retirar</button>
+        </form>
+        <div id="retirarResultado"></div>
+    </section>
+    
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
+
